@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2025 BeSA Marketplace. All rights reserved. Made with ❤️ in Kenya.
+            © 2026 superiorKe. All rights reserved. Made in Kenya.
           </p>
         </div>
       </div>

@@ -9,8 +9,14 @@ import './index.css'
 
 async function enableMocking() {
   if (import.meta.env.VITE_ENABLE_MOCKS !== 'true') return
-  const { worker } = await import('./mocks/browser')
-  return worker.start({ onUnhandledRequest: 'bypass' })
+  
+  try {
+    const { worker } = await import('./mocks/browser')
+    await worker.start({ onUnhandledRequest: 'bypass' })
+    console.log('[MSW] Mock Service Worker started successfully')
+  } catch (error) {
+    console.error('[MSW] Failed to start Mock Service Worker:', error)
+  }
 }
 
 const queryClient = new QueryClient({

@@ -1,13 +1,19 @@
-import { apiClient } from './client'
+import { mockApi } from './mock.api'
 import type { Order, CreateOrderPayload } from '@/types'
 
 export const ordersApi = {
   create: (data: CreateOrderPayload) =>
-    apiClient.post<Order>('/orders/', data).then((r) => r.data),
+    // Temporarily use mock API directly instead of HTTP client
+    mockApi.createOrder(data),
+    // apiClient.post<Order>('/orders/', data).then((r) => r.data),
 
   list: () =>
-    apiClient.get<Order[]>('/orders/').then((r) => r.data),
+    // Temporarily use mock API directly instead of HTTP client
+    mockApi.getOrders(),
+    // apiClient.get<Order[]>('/orders/').then((r) => r.data),
 
   detail: (id: number) =>
-    apiClient.get<Order>(`/orders/${id}/`).then((r) => r.data),
+    // Temporarily use mock API directly instead of HTTP client
+    mockApi.getOrder(id),
+    // apiClient.get<Order>(`/orders/${id}/`).then((r) => r.data),
 }

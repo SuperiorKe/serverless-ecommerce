@@ -77,6 +77,9 @@ export type CartItem = {
 export type Cart = {
   id: number
   items: CartItem[]
+  subtotal: string
+  shipping_cost: string
+  tax: string
   total: string
   item_count: number
 }

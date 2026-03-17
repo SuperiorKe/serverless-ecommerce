@@ -1,14 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom'
-import Layout from '@/components/layout/Layout'
-import HomePage from '@/pages/HomePage'
-import ProductsPage from '@/pages/ProductsPage'
-import ProductDetailPage from '@/pages/ProductDetailPage'
-import CartPage from '@/pages/CartPage'
-import CheckoutPage from '@/pages/CheckoutPage'
-import LoginPage from '@/pages/LoginPage'
-import RegisterPage from '@/pages/RegisterPage'
-import AccountPage from '@/pages/AccountPage'
-import OrdersPage from '@/pages/OrdersPage'
+import { Layout } from '@/components/layout/Layout'
+import { HomePage } from '@/pages/HomePage'
+import { ProductsPage } from '@/pages/ProductsPage'
+import { ProductDetailPage } from '@/pages/ProductDetailPage'
+import { CartPage } from '@/pages/CartPage'
+import { CheckoutPage } from '@/pages/CheckoutPage'
+import { LoginPage } from '@/pages/LoginPage'
+import { RegisterPage } from '@/pages/RegisterPage'
+import { AccountPage } from '@/pages/AccountPage'
+import { OrdersPage } from '@/pages/OrdersPage'
+import { CategoriesPage } from '@/pages/CategoriesPage'
+import { AboutPage } from '@/pages/AboutPage'
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,8 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'products', element: <ProductsPage /> },
       { path: 'products/:slug', element: <ProductDetailPage /> },
+      { path: 'categories', element: <CategoriesPage /> },
+      { path: 'about', element: <AboutPage /> },
       { path: 'cart', element: <CartPage /> },
       { path: 'checkout', element: <CheckoutPage /> },
       { path: 'account', element: <AccountPage /> },

@@ -1,14 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useFeaturedProducts } from '@/hooks/useProducts'
+import { useAddToCart } from '@/hooks/useCart'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { StarRating } from '@/components/ui/StarRating'
 import { formatPrice, formatDiscount } from '@/utils/formatPrice'
-import { ArrowRight, ShoppingBag } from 'lucide-react'
+import { ArrowRight, ShoppingBag, Truck, ShieldCheck, Lock } from 'lucide-react'
 
 export const HomePage: React.FC = () => {
   const { data: featuredProducts, isLoading, error } = useFeaturedProducts()
+  const addToCart = useAddToCart()
+
+  const handleAddToCart = (productId: number) => {
+    addToCart.mutate({ productId, quantity: 1 })
+  }
 
   return (
     <div className="space-y-16">
@@ -45,21 +51,21 @@ export const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ShoppingBag className="h-8 w-8 text-brand-600" />
+                <Truck className="h-8 w-8 text-brand-600" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Fast Delivery</h3>
               <p className="text-gray-600">Quick and reliable delivery across Kenya</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ShoppingBag className="h-8 w-8 text-brand-600" />
+                <ShieldCheck className="h-8 w-8 text-brand-600" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Authentic Products</h3>
               <p className="text-gray-600">Genuine items from verified local sellers</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ShoppingBag className="h-8 w-8 text-brand-600" />
+                <Lock className="h-8 w-8 text-brand-600" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Secure Payment</h3>
               <p className="text-gray-600">Safe and secure payment methods</p>
@@ -121,7 +127,14 @@ export const HomePage: React.FC = () => {
                           </span>
                         )}
                       </div>
-                      <Button size="sm">Add to Cart</Button>
+                      <Button 
+                        size="sm" 
+                        onClick={() => handleAddToCart(product.id)}
+                        disabled={!product.in_stock || addToCart.isPending}
+                        className="whitespace-nowrap"
+                      >
+                        {addToCart.isPending ? 'Adding...' : 'Add to Cart'}
+                      </Button>
                     </div>
                   </div>
                 </div>
