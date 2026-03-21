@@ -1,5 +1,5 @@
 import { mockApi } from './mock.api'
-import type { Order, CreateOrderPayload } from '@/types'
+import type { CreateOrderPayload } from '@/types'
 
 export const ordersApi = {
   create: (data: CreateOrderPayload) =>

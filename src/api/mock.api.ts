@@ -26,7 +26,7 @@ const MOCK_USER: User = {
 }
 
 // Mock orders state
-let mockOrders: Order[] = [...MOCK_ORDERS]
+const mockOrders: Order[] = [...MOCK_ORDERS]
 
 function recalcCart(): Cart {
   const subtotal = mockCart.items.reduce((sum, item) => sum + parseFloat(item.subtotal), 0)

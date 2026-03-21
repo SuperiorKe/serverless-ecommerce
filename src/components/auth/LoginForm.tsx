@@ -44,6 +44,7 @@ export const LoginForm: React.FC = () => {
       // Redirect to the page they came from, or default to account
       const from = location.state?.from || '/account'
       navigate(from, { replace: true })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors)

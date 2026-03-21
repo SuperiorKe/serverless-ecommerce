@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useProducts } from '@/hooks/useProducts'
 import { useAddToCart } from '@/hooks/useCart'
 import { Button } from '@/components/ui/Button'
@@ -10,7 +11,26 @@ import { Spinner } from '@/components/ui/Spinner'
 import { CategoryPills } from '@/components/products/CategoryPills'
 
 export const ProductsPage: React.FC = () => {
-  const { data: productsData, isLoading, error } = useProducts()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const category = searchParams.get('category')
+  const search = searchParams.get('search')
+  
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    const newParams = new URLSearchParams(searchParams)
+    if (val) {
+      newParams.set('search', val)
+    } else {
+      newParams.delete('search')
+    }
+    setSearchParams(newParams, { replace: true })
+  }
+
+  const filters: Record<string, string> = {}
+  if (category) filters.category = category
+  if (search) filters.search = search
+
+  const { data: productsData, isLoading, error } = useProducts(filters)
   const addToCart = useAddToCart()
 
   const handleAddToCart = (productId: number) => {
@@ -42,8 +62,18 @@ export const ProductsPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">All Products</h1>
-        <p className="text-gray-600">Discover our complete collection of authentic African products</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4 transition-colors">All Products</h1>
+        <p className="text-gray-600 dark:text-gray-300 transition-colors">Discover our complete collection of authentic African products</p>
+      </div>
+
+      <div className="mb-6 max-w-md">
+        <input 
+          type="text" 
+          placeholder="Search products by name..." 
+          className="w-full px-4 py-2 border border-gray-300 dark:border-secondary-700 bg-white dark:bg-secondary-800 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-brand-600 outline-none transition-colors text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+          value={search || ''}
+          onChange={handleSearchChange}
+        />
       </div>
 
       <CategoryPills />
@@ -57,33 +87,39 @@ export const ProductsPage: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+            <div key={product.id} className="bg-white dark:bg-secondary-800 rounded-lg shadow-sm border border-transparent dark:border-secondary-700 overflow-hidden hover:shadow-md transition-shadow">
               <div className="relative">
-                <img
-                  src={product.images[0]?.url}
-                  alt={product.name}
-                  className="w-full h-48 object-cover"
-                />
+                <Link to={`/products/${product.slug}`}>
+                  <img
+                    src={product.images[0]?.url}
+                    alt={product.name}
+                    className="w-full h-48 object-cover hover:opacity-90 transition-opacity"
+                  />
+                </Link>
                 {product.original_price && (
                   <Badge variant="sale" className="absolute top-2 left-2">
                     -{formatDiscount(product.original_price, product.price)}%
                   </Badge>
                 )}
                 {!product.in_stock && (
-                  <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gray-900/50 dark:bg-black/60 flex items-center justify-center">
                     <Badge variant="pending">Out of Stock</Badge>
                   </div>
                 )}
               </div>
               <div className="p-4">
-                <h3 className="font-medium text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-                <p className="text-sm text-gray-500 mb-2">{product.location}</p>
+                <Link to={`/products/${product.slug}`}>
+                  <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-1 line-clamp-2 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">
+                    {product.name}
+                  </h3>
+                </Link>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{product.location}</p>
                 <StarRating rating={product.rating} reviewCount={product.review_count} size="sm" />
                 <div className="mt-3 flex items-center justify-between">
                   <div>
-                    <span className="text-lg font-bold text-brand-600">{formatPrice(product.price)}</span>
+                    <span className="text-lg font-bold text-brand-600 dark:text-brand-400 transition-colors">{formatPrice(product.price)}</span>
                     {product.original_price && (
-                      <span className="text-sm text-gray-500 line-through ml-2">
+                      <span className="text-sm text-gray-500 dark:text-gray-400 line-through ml-2 transition-colors">
                         {formatPrice(product.original_price)}
                       </span>
                     )}

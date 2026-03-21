@@ -1,0 +1,7 @@
+feat: Rebrand to Elites, Cart Fixes, Filtering, and Dark Mode
+
+- Rebranding: Replaced all instances of "BeSa" with "Elites" globally.
+- Documentation: Overhauled the README.md to be smoother, structured, and clearer.
+- Cart UX: Wired the increment, decrement, and item removal hooks to the CartDrawer.
+- Filtering: Mapped ProductsPage to URL search params and implemented live text search.
+- Dark Mode Architecture: Implemented a robust Tailwind class-based theme engine with Zustand localStorage persistence and comprehensive Blue Zodiac component styling across the UI.

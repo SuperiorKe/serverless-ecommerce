@@ -1,5 +1,5 @@
 import { mockApi } from './mock.api'
-import type { User, LoginPayload, RegisterPayload } from '@/types'
+import type { LoginPayload, RegisterPayload } from '@/types'
 
 export const authApi = {
   login: (data: LoginPayload) =>

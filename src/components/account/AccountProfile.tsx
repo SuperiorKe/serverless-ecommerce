@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button'
 
 export const AccountProfile: React.FC = () => {
   const user = useAuthStore((state) => state.user)
-  const { setUser, clearUser } = useAuthStore()
+  const { clearUser } = useAuthStore()
 
   const handleLogout = () => {
     clearUser()

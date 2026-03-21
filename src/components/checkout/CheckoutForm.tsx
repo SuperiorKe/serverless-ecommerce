@@ -39,10 +39,9 @@ export const CheckoutForm: React.FC = () => {
     
     try {
       const order = await createOrder.mutateAsync({ shipping_address: shippingAddress })
-      // Navigate to orders page with success message
-      navigate('/orders', { 
+      // Navigate to order-success page with the new order context
+      navigate('/order-success', { 
         state: { 
-          successMessage: 'Order placed successfully!',
           newOrder: order 
         } 
       })
@@ -237,22 +236,28 @@ export const CheckoutForm: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex justify-between items-center">
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={() => navigate('/cart')}
-        >
-          Back to Cart
-        </Button>
-        
-        <Button
-          type="submit"
-          disabled={!isFormValid || isSubmitting || createOrder.isPending}
-          className="px-8"
-        >
-          {isSubmitting || createOrder.isPending ? 'Processing...' : 'Place Order'}
-        </Button>
+      <div className="flex flex-col items-end gap-2">
+        {!isFormValid && (
+          <p className="text-sm text-red-500 text-right w-full">Please fill out all required fields marked with *</p>
+        )}
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-3 w-full">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => navigate('/cart')}
+            className="w-full sm:w-auto"
+          >
+            Back to Cart
+          </Button>
+          
+          <Button
+            type="submit"
+            disabled={!isFormValid || isSubmitting || createOrder.isPending}
+            className="w-full sm:w-auto px-8"
+          >
+            {isSubmitting || createOrder.isPending ? 'Processing...' : 'Place Order'}
+          </Button>
+        </div>
       </div>
     </form>
   )

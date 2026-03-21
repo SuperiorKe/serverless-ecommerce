@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useCart } from '@/hooks/useCart'
+import { useCart, useUpdateCartItem, useRemoveCartItem } from '@/hooks/useCart'
 import { Button } from '@/components/ui/Button'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { formatPrice } from '@/utils/formatPrice'
@@ -9,6 +9,18 @@ import { X, Plus, Minus } from 'lucide-react'
 
 export const CartPage: React.FC = () => {
   const { data: cart, isLoading } = useCart()
+  const updateItem = useUpdateCartItem()
+  const removeItem = useRemoveCartItem()
+
+  const handleUpdateQuantity = (itemId: number, currentQuantity: number, change: number) => {
+    const newQuantity = currentQuantity + change
+    if (newQuantity < 1) return
+    updateItem.mutate({ itemId, quantity: newQuantity })
+  }
+
+  const handleRemove = (itemId: number) => {
+    removeItem.mutate(itemId)
+  }
 
   if (isLoading) {
     return (
@@ -62,18 +74,31 @@ export const CartPage: React.FC = () => {
                       {formatPrice(item.product.price)}
                     </p>
                     <div className="flex items-center space-x-2 mt-2">
-                      <button className="p-1 hover:bg-gray-100 rounded">
+                      <button 
+                        className="p-1 hover:bg-gray-100 rounded disabled:opacity-50"
+                        onClick={() => handleUpdateQuantity(item.id, item.quantity, -1)}
+                        disabled={updateItem.isPending || item.quantity <= 1}
+                      >
                         <Minus className="h-4 w-4" />
                       </button>
                       <span className="text-sm font-medium w-8 text-center">{item.quantity}</span>
-                      <button className="p-1 hover:bg-gray-100 rounded">
+                      <button 
+                        className="p-1 hover:bg-gray-100 rounded disabled:opacity-50"
+                        onClick={() => handleUpdateQuantity(item.id, item.quantity, 1)}
+                        disabled={updateItem.isPending}
+                      >
                         <Plus className="h-4 w-4" />
                       </button>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold">{formatPrice(item.subtotal)}</p>
-                    <button className="text-sm text-red-600 hover:text-red-700 mt-1">
+                    <button 
+                      className="text-sm text-red-600 hover:text-red-700 mt-1 disabled:opacity-50 shrink-0"
+                      onClick={() => handleRemove(item.id)}
+                      disabled={removeItem.isPending}
+                      aria-label="Remove item"
+                    >
                       <X className="h-4 w-4" />
                     </button>
                   </div>

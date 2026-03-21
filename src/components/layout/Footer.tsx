@@ -8,15 +8,15 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">About BeSA</h3>
+            <h3 className="text-lg font-semibold mb-4">About Elites</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
-              BeSA is your trusted marketplace for authentic African products. 
+              Elites is your trusted marketplace for authentic premium products. 
               We connect local artisans and businesses with customers across Kenya and beyond.
             </p>
             <div className="mt-4">
               <h4 className="font-medium mb-2">Contact Us</h4>
               <p className="text-gray-300 text-sm">
-                Email: info@besa.co.ke<br />
+                Email: info@elites.africa<br />
                 Phone: +254 700 000 000<br />
                 Nairobi, Kenya
               </p>

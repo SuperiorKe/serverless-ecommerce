@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -9,12 +10,28 @@ export default {
       },
       colors: {
         brand: {
-          50:  '#fff7ed',
-          100: '#ffedd5',
-          500: '#f97316',
-          600: '#ea580c',
-          700: '#c2410c',
-          900: '#7c2d12',
+          50: '#f0fdf6',
+          100: '#dcfce9',
+          200: '#bbeed3',
+          300: '#7eedaf',
+          400: '#3ce392',
+          500: '#05f182', // Spring Green
+          600: '#03c66a',
+          700: '#049d56',
+          800: '#067b46',
+          900: '#07653a',
+        },
+        secondary: {
+          50: '#f2f4f8',
+          100: '#e1e5ee',
+          200: '#c5ccdc',
+          300: '#9ba7c2',
+          400: '#6a7ba1',
+          500: '#485a85',
+          600: '#364468',
+          700: '#2c3754',
+          800: '#172d55', // Blue Zodiac
+          900: '#1d263a',
         },
       },
     },

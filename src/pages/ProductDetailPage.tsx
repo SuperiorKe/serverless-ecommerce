@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useProduct } from '@/hooks/useProducts'
+import { useAddToCart } from '@/hooks/useCart'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { StarRating } from '@/components/ui/StarRating'
@@ -10,6 +11,11 @@ import { Spinner } from '@/components/ui/Spinner'
 export const ProductDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
   const { data: product, isLoading, error } = useProduct(slug || '')
+  const addToCart = useAddToCart()
+
+  const handleAddToCart = (productId: number) => {
+    addToCart.mutate({ productId, quantity: 1 })
+  }
 
   if (isLoading) {
     return (
@@ -86,8 +92,13 @@ export const ProductDetailPage: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            <Button size="lg" className="w-full" disabled={!product.in_stock}>
-              {product.in_stock ? 'Add to Cart' : 'Out of Stock'}
+            <Button 
+               size="lg" 
+               className="w-full" 
+               disabled={!product.in_stock || addToCart.isPending}
+               onClick={() => handleAddToCart(product.id)}
+            >
+              {addToCart.isPending ? 'Adding...' : product.in_stock ? 'Add to Cart' : 'Out of Stock'}
             </Button>
             <Button variant="secondary" size="lg" className="w-full">
               Save for Later

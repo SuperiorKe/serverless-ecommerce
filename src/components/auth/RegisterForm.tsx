@@ -47,6 +47,7 @@ export const RegisterForm: React.FC = () => {
           from: '/account'
         } 
       })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors)

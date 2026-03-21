@@ -4,13 +4,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import type { Order, OrderStatus } from '@/types'
 
-const statusColors: Record<OrderStatus, string> = {
-  pending: 'bg-yellow-100 text-yellow-800',
-  confirmed: 'bg-blue-100 text-blue-800',
-  shipped: 'bg-purple-100 text-purple-800',
-  delivered: 'bg-green-100 text-green-800',
-  cancelled: 'bg-red-100 text-red-800',
-}
+
 
 const statusText: Record<OrderStatus, string> = {
   pending: 'Pending',
@@ -44,6 +38,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
             Placed on {formatDate(order.created_at)}
           </p>
         </div>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         <Badge variant={order.status as any}>
           {statusText[order.status]}
         </Badge>
@@ -97,15 +92,15 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
           </div>
         </div>
 
-        <div className="flex justify-between items-center pt-4 border-t">
-          <Link to={`/products`}>
-            <Button variant="secondary" size="sm">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 pt-4 border-t">
+          <Link to={`/products`} className="w-full sm:w-auto">
+            <Button variant="secondary" size="sm" className="w-full">
               Continue Shopping
             </Button>
           </Link>
           
           {order.status === 'delivered' && (
-            <Button size="sm">
+            <Button size="sm" className="w-full sm:w-auto">
               Buy Again
             </Button>
           )}
@@ -114,7 +109,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
             <Button 
               variant="secondary" 
               size="sm"
-              className="text-red-600 hover:text-red-700"
+              className="w-full sm:w-auto text-red-600 hover:text-red-700"
             >
               Cancel Order
             </Button>

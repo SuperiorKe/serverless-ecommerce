@@ -4,7 +4,7 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">About BeSA</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">About Elites</h1>
         <p className="text-gray-600">Connecting African artisans with the world</p>
       </div>
 
@@ -13,7 +13,7 @@ export const AboutPage: React.FC = () => {
           <div>
             <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
             <p className="text-gray-600 mb-4">
-              BeSA (Buy and Sell Africa) is dedicated to connecting local African artisans and businesses 
+              Elites is a premium marketplace dedicated to connecting local African artisans and businesses 
               with customers worldwide. We believe in authentic craftsmanship, fair trade, and sustainable 
               economic growth for communities across the continent.
             </p>
@@ -47,7 +47,7 @@ export const AboutPage: React.FC = () => {
         </div>
 
         <div className="bg-gray-50 rounded-lg p-8 mb-12">
-          <h2 className="text-2xl font-semibold mb-4 text-center">Why Choose BeSA?</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-center">Why Choose Elites?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -80,7 +80,7 @@ export const AboutPage: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="mailto:info@besa.africa" 
+              href="mailto:info@elites.africa" 
               className="px-6 py-3 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors"
             >
               Email Us
