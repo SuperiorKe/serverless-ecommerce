@@ -31,8 +31,8 @@ export const CategoriesPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Categories</h1>
-        <p className="text-gray-600">Browse products by category</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4 transition-colors">Categories</h1>
+        <p className="text-gray-600 dark:text-gray-300 transition-colors">Browse products by category</p>
       </div>
 
       {!categories || categories.length === 0 ? (
@@ -47,16 +47,16 @@ export const CategoriesPage: React.FC = () => {
             <Link
               key={category.id}
               to={`/products?category=${category.slug}`}
-              className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200"
+              className="block p-6 bg-white dark:bg-secondary-800 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-secondary-700"
             >
               <div className="text-center">
-                <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-brand-600">
+                <div className="w-16 h-16 bg-brand-100 dark:bg-brand-900/30 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <span className="text-2xl font-bold text-brand-600 dark:text-brand-400">
                     {category.name.charAt(0)}
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{category.name}</h3>
-                <p className="text-sm text-gray-600 mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 transition-colors">{category.name}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 transition-colors">
                   View all {category.name.toLowerCase()} products
                 </p>
                 <Button variant="secondary" size="sm">
