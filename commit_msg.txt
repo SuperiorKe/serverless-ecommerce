@@ -1,4 +1,0 @@
-fix(theme): apply missing dark mode classes to categories and about pages
-
-- CategoriesPage: Replaced static white cards with `dark:bg-secondary-800` and `dark:text-gray-100` styling overrides.
-- AboutPage: Inverted the typography array and applied deep Blue Zodiac shading to the 'Why Choose Elites' information grid.
