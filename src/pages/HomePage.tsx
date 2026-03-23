@@ -107,7 +107,7 @@ export const HomePage: React.FC = () => {
                       <img
                         src={product.images[0]?.url}
                         alt={product.name}
-                        className="w-full h-48 object-cover hover:opacity-90 transition-opacity"
+                        className="w-full aspect-[4/3] object-cover hover:opacity-90 transition-opacity"
                       />
                     </Link>
                     {product.original_price && (

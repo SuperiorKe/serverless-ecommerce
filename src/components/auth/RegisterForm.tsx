@@ -11,6 +11,7 @@ export const RegisterForm: React.FC = () => {
   const [formData, setFormData] = useState<RegisterPayload>({
     email: '',
     password: '',
+    password_confirm: '',
     first_name: '',
     last_name: '',
   })
@@ -51,6 +52,8 @@ export const RegisterForm: React.FC = () => {
     } catch (error: any) {
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors)
+      } else if (error.response?.data) {
+        setErrors(error.response.data)
       } else {
         setErrors({ general: 'Registration failed. Please try again.' })
       }
@@ -61,11 +64,11 @@ export const RegisterForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-6">Create Account</h2>
+      <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-sm border border-transparent dark:border-secondary-700 p-6 transition-colors">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 transition-colors">Create Account</h2>
         
         {errors.general && (
-          <div className="bg-red-50 text-red-600 p-3 rounded-md mb-4">
+          <div className="bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-3 rounded-md mb-4 transition-colors">
             {errors.general}
           </div>
         )}
@@ -73,15 +76,15 @@ export const RegisterForm: React.FC = () => {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
                 First Name
               </label>
               <input
                 type="text"
                 value={formData.first_name}
                 onChange={(e) => handleInputChange('first_name', e.target.value)}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent ${
-                  errors.first_name ? 'border-red-300' : 'border-gray-300'
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500 ${
+                  errors.first_name ? 'border-red-300 dark:border-red-500/50' : 'border-gray-300 dark:border-secondary-600'
                 }`}
                 placeholder="Enter your first name"
                 required
@@ -92,15 +95,15 @@ export const RegisterForm: React.FC = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
                 Last Name
               </label>
               <input
                 type="text"
                 value={formData.last_name}
                 onChange={(e) => handleInputChange('last_name', e.target.value)}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent ${
-                  errors.last_name ? 'border-red-300' : 'border-gray-300'
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500 ${
+                  errors.last_name ? 'border-red-300 dark:border-red-500/50' : 'border-gray-300 dark:border-secondary-600'
                 }`}
                 placeholder="Enter your last name"
                 required
@@ -112,15 +115,15 @@ export const RegisterForm: React.FC = () => {
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
               Email Address
             </label>
             <input
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent ${
-                errors.email ? 'border-red-300' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500 ${
+                errors.email ? 'border-red-300 dark:border-red-500/50' : 'border-gray-300 dark:border-secondary-600'
               }`}
               placeholder="Enter your email"
               required
@@ -130,29 +133,51 @@ export const RegisterForm: React.FC = () => {
             )}
           </div>
           
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              value={formData.password}
-              onChange={(e) => handleInputChange('password', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent ${
-                errors.password ? 'border-red-300' : 'border-gray-300'
-              }`}
-              placeholder="Create a password"
-              required
-              minLength={6}
-            />
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-600">{errors.password}</p>
-            )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
+                Password
+              </label>
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) => handleInputChange('password', e.target.value)}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500 ${
+                  errors.password ? 'border-red-300 dark:border-red-500/50' : 'border-gray-300 dark:border-secondary-600'
+                }`}
+                placeholder="Create a password"
+                required
+                minLength={8}
+              />
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+              )}
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                value={formData.password_confirm}
+                onChange={(e) => handleInputChange('password_confirm', e.target.value)}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500 ${
+                  errors.password_confirm ? 'border-red-300 dark:border-red-500/50' : 'border-gray-300 dark:border-secondary-600'
+                }`}
+                placeholder="Confirm password"
+                required
+                minLength={8}
+              />
+              {errors.password_confirm && (
+                <p className="mt-1 text-sm text-red-600">{errors.password_confirm}</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-sm border border-transparent dark:border-secondary-700 p-6 transition-colors">
         <div className="space-y-4">
           <Button
             type="submit"
@@ -163,7 +188,7 @@ export const RegisterForm: React.FC = () => {
           </Button>
           
           <div className="text-center mt-4">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-300 transition-colors">
               Already have an account?{' '}
               <button
                 type="button"

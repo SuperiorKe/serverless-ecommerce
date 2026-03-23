@@ -5,7 +5,8 @@ import { MOCK_ORDERS } from '@/mocks/data/orders.data'
 import type { Product, ProductsResponse, Category, ProductFilters, Cart, CartItem, User, LoginPayload, RegisterPayload, Order, CreateOrderPayload } from '@/types'
 
 // Mock cart state
-let mockCart: Cart = { 
+const storedCart = localStorage.getItem('mock_cart')
+let mockCart: Cart = storedCart ? JSON.parse(storedCart) : { 
   id: 1, 
   items: [], 
   subtotal: '0.00',
@@ -39,6 +40,8 @@ function recalcCart(): Cart {
   mockCart.tax = tax
   mockCart.total = total
   mockCart.item_count = mockCart.items.reduce((sum, item) => sum + item.quantity, 0)
+  
+  localStorage.setItem('mock_cart', JSON.stringify(mockCart))
   return mockCart
 }
 
@@ -145,6 +148,7 @@ export const mockApi = {
       total: '0.00', 
       item_count: 0 
     }
+    localStorage.removeItem('mock_cart')
     return mockCart
   },
 

@@ -20,6 +20,11 @@ function getCookie(name: string): string | null {
 }
 
 apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('access_token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+
   const method = config.method?.toLowerCase()
   if (method && ['post', 'put', 'patch', 'delete'].includes(method)) {
     const csrfToken = getCookie('csrftoken')

@@ -69,7 +69,7 @@ export const CheckoutForm: React.FC = () => {
   if (!cart?.items.length) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">Your cart is empty. Add some items before checkout.</p>
+        <p className="text-gray-600 dark:text-gray-300 transition-colors">Your cart is empty. Add some items before checkout.</p>
         <Button 
           variant="secondary" 
           className="mt-4"
@@ -83,32 +83,32 @@ export const CheckoutForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
+      <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-sm border border-transparent dark:border-secondary-700 p-6 transition-colors">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 transition-colors">Shipping Information</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
               Full Name *
             </label>
             <input
               type="text"
               value={shippingAddress.full_name}
               onChange={(e) => handleInputChange('full_name', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-secondary-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500"
               required
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
               Phone Number *
             </label>
             <input
               type="tel"
               value={shippingAddress.phone}
               onChange={(e) => handleInputChange('phone', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-secondary-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500"
               required
             />
           </div>
@@ -141,51 +141,51 @@ export const CheckoutForm: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
               City *
             </label>
             <input
               type="text"
               value={shippingAddress.city}
               onChange={(e) => handleInputChange('city', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-secondary-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500"
               required
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
               County *
             </label>
             <input
               type="text"
               value={shippingAddress.county}
               onChange={(e) => handleInputChange('county', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-secondary-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500"
               required
             />
           </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+      <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-sm border border-transparent dark:border-secondary-700 p-6 transition-colors">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 transition-colors">Order Summary</h2>
         
         <div className="space-y-2 mb-4">
           {cart.items.map((item) => (
-            <div key={item.id} className="flex justify-between items-center py-2 border-b">
+            <div key={item.id} className="flex justify-between items-center py-2 border-b dark:border-secondary-700 transition-colors">
               <div className="flex-1">
-                <h3 className="font-medium">{item.product.name}</h3>
-                <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+                <h3 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">{item.product.name}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Qty: {item.quantity}</p>
               </div>
               <div className="text-right">
-                <p className="font-medium">KES {item.subtotal}</p>
+                <p className="font-medium text-gray-900 dark:text-white transition-colors">KES {item.subtotal}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="space-y-2 pt-4 border-t">
+        <div className="space-y-2 pt-4 border-t dark:border-secondary-700 transition-colors text-gray-700 dark:text-gray-300">
           <div className="flex justify-between">
             <span>Subtotal:</span>
             <span>KES {cart.subtotal}</span>
@@ -198,16 +198,16 @@ export const CheckoutForm: React.FC = () => {
             <span>Tax (16%):</span>
             <span>KES {cart.tax}</span>
           </div>
-          <div className="flex justify-between text-lg font-semibold">
+          <div className="flex justify-between text-lg font-semibold text-gray-900 dark:text-white transition-colors">
             <span>Total:</span>
-            <span className="text-brand-600">KES {cart.total}</span>
+            <span className="text-brand-600 dark:text-brand-400 transition-colors">KES {cart.total}</span>
           </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
-        <div className="space-y-3">
+      <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-sm border border-transparent dark:border-secondary-700 p-6 transition-colors">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 transition-colors">Payment Method</h2>
+        <div className="space-y-3 text-gray-700 dark:text-gray-200 transition-colors">
           <label className="flex items-center">
             <input
               type="radio"

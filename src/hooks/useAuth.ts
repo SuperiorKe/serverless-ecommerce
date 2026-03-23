@@ -7,14 +7,25 @@ import type { LoginPayload, RegisterPayload } from '@/types'
 
 export function useMe() {
   const setUser = useAuthStore((s) => s.setUser)
+  const token = localStorage.getItem('access_token')
 
   return useQuery({
     queryKey: ['me'],
     queryFn: async () => {
-      const user = await authApi.me()
-      setUser(user)
-      return user
+      if (!token) {
+        setUser(null)
+        return null
+      }
+      try {
+        const user = await authApi.me()
+        setUser(user)
+        return user
+      } catch (error) {
+        setUser(null)
+        throw error
+      }
     },
+    enabled: !!token,
     retry: false,
   })
 }
@@ -37,16 +48,8 @@ export function useLogin() {
 }
 
 export function useRegister() {
-  const setUser = useAuthStore((s) => s.setUser)
-  const navigate = useNavigate()
-
   return useMutation({
     mutationFn: (data: RegisterPayload) => authApi.register(data),
-    onSuccess: (user) => {
-      setUser(user)
-      toast.success('Account created! Welcome to the marketplace.')
-      navigate('/')
-    },
     onError: () => {
       toast.error('Registration failed. Please check your details.')
     },

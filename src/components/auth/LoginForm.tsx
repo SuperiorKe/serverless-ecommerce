@@ -58,26 +58,26 @@ export const LoginForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-6">Welcome Back</h2>
+      <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-sm border border-transparent dark:border-secondary-700 p-6 transition-colors">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 transition-colors">Welcome Back</h2>
         
         {errors.general && (
-          <div className="bg-red-50 text-red-600 p-3 rounded-md mb-4">
+          <div className="bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-3 rounded-md mb-4 transition-colors">
             {errors.general}
           </div>
         )}
         
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
               Email Address
             </label>
             <input
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent ${
-                errors.email ? 'border-red-300' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500 ${
+                errors.email ? 'border-red-300 dark:border-red-500/50' : 'border-gray-300 dark:border-secondary-600'
               }`}
               placeholder="Enter your email"
               required
@@ -88,15 +88,15 @@ export const LoginForm: React.FC = () => {
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1 transition-colors">
               Password
             </label>
             <input
               type="password"
               value={formData.password}
               onChange={(e) => handleInputChange('password', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent ${
-                errors.password ? 'border-red-300' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white dark:bg-secondary-900 text-gray-900 dark:text-white transition-colors placeholder-gray-400 dark:placeholder-gray-500 ${
+                errors.password ? 'border-red-300 dark:border-red-500/50' : 'border-gray-300 dark:border-secondary-600'
               }`}
               placeholder="Enter your password"
               required
@@ -108,7 +108,7 @@ export const LoginForm: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-sm border border-transparent dark:border-secondary-700 p-6 transition-colors">
         <div className="space-y-4">
           <Button
             type="submit"
@@ -119,7 +119,7 @@ export const LoginForm: React.FC = () => {
           </Button>
           
           <div className="text-center mt-4">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-300 transition-colors">
               Don't have an account?{' '}
               <button
                 type="button"

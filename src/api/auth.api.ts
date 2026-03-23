@@ -1,30 +1,29 @@
-import { mockApi } from './mock.api'
-import type { LoginPayload, RegisterPayload } from '@/types'
+import { apiClient } from './client'
+import type { LoginPayload, RegisterPayload, User } from '@/types'
 
 export const authApi = {
   login: (data: LoginPayload) =>
-    // Temporarily use mock API directly instead of HTTP client
-    mockApi.login(data),
-    // apiClient.post<User>('/auth/login/', data).then((r) => r.data),
+    apiClient.post<any>('/users/login/', data).then((r) => {
+      if (r.data.access) {
+        localStorage.setItem('access_token', r.data.access)
+      }
+      return r.data.user as User
+    }),
 
   logout: () =>
-    // Temporarily use mock API directly instead of HTTP client
-    mockApi.logout(),
-    // apiClient.post('/auth/logout/').then((r) => r.data),
+    apiClient.post('/users/logout/').then((r) => {
+      localStorage.removeItem('access_token')
+      return r.data
+    }),
 
   register: (data: RegisterPayload) =>
-    // Temporarily use mock API directly instead of HTTP client
-    mockApi.register(data),
-    // apiClient.post<User>('/auth/register/', data).then((r) => r.data),
+    apiClient.post<any>('/users/register/', data).then((r) => r.data.user as User),
 
   me: () =>
-    // Temporarily use mock API directly instead of HTTP client
-    mockApi.me(),
-    // apiClient.get<User>('/auth/me/').then((r) => r.data),
+    apiClient.get<any>('/users/me/').then((r) => r.data.user as User),
 
   // Fetches CSRF cookie from Django before any auth mutation
   fetchCsrf: () =>
-    // Temporarily use mock API directly instead of HTTP client
-    mockApi.fetchCsrf(),
-    // apiClient.get('/auth/csrf/'),
+    apiClient.get('/users/csrf/'),
 }
+

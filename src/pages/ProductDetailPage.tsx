@@ -42,11 +42,11 @@ export const ProductDetailPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Product Images */}
         <div>
-          <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+          <div className="w-full aspect-[4/3] md:aspect-square max-h-[50vh] lg:max-h-none bg-gray-100 dark:bg-secondary-800 rounded-lg overflow-hidden flex items-center justify-center">
             <img
               src={product.images[0]?.url}
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
             />
           </div>
         </div>
